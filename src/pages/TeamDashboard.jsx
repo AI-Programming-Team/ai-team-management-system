@@ -5,6 +5,7 @@ import TaskList from "../components/TaskList";
 import TeamList from "../components/TeamList";
 import sampleTeams from "../data/sampleTeams";
 import demoProjects from "../data/sampleProjects";
+import demoTasks from "../data/sampleTasks";  // Import the sample tasks data
 import AIProjectCard from "../components/AIProjectCard";
 
 export default function TeamDashboard() {
