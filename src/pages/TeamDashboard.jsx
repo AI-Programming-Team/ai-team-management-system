@@ -1,49 +1,33 @@
+// src/TeamDashboard.jsx
 import React from "react";
-import AIProjectCard from "../components/AIProjectCard";
+import Header from "../components/Header";
 import TaskList from "../components/TaskList";
+import TeamList from "../components/TeamList";
+import sampleTeams from "../data/sampleTeams";
+import demoProjects from "../data/sampleProjects";
+import { AIProjectCard } from "../components/AIProjectCard";
 
-const demoProjects = [
-  {
-    teamName: "AI Dev Team",
-    projectName: "Financial App",
-    status: "In Progress",
-    lead: "GPT Dev #1",
-    description: "Building a budgeting system with real-time analytics.",
-  },
-  {
-    teamName: "AI Marketing Team",
-    projectName: "Launch Campaign",
-    status: "Planning",
-    lead: "GPT Marketer #3",
-    description: "Preparing multi-channel rollout for app release.",
-  },
-];
-
-const demoTasks = [
-  {
-    title: "Create Login UI",
-    description: "Design and implement login form with Tailwind.",
-  },
-  {
-    title: "Setup Firebase",
-    description: "Initialize project with Firebase for backend support.",
-  },
-];
-
-const TeamDashboard = () => {
+export default function TeamDashboard() {
   return (
-    <div className="p-6 space-y-6">
-      <h1 className="text-3xl font-bold">AI Team Dashboard</h1>
+    <>
+      <Header />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {demoProjects.map((project, index) => (
-          <AIProjectCard key={index} {...project} />
-        ))}
-      </div>
+      <main className="mx-auto max-w-7xl px-4 py-6 space-y-6">
+        {/* Projects grid */}
+        <h1 className="text-3xl font-bold">AI Team Dashboard</h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {demoProjects.map((project) => (
+            <AIProjectCard key={project.id} project={project} />
+          ))}
+        </div>
 
-      <TaskList tasks={demoTasks} />
-    </div>
+        {/* Tasks & Teams side by side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <TaskList tasks={demoTasks} />
+          <TeamList teams={sampleTeams} />
+        </div>
+      </main>
+    </>
   );
-};
+}
 
-export default TeamDashboard;
