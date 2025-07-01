@@ -1,5 +1,4 @@
 // src/TeamDashboard.jsx
-import React from "react";
 import React, { useState } from "react";
 import demoTasks from "../data/sampleTasks";  // Import the sample tasks data
 import TaskList from "../components/TaskList";
