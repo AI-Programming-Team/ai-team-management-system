@@ -7,6 +7,7 @@ import sampleTeams from "../data/sampleTeams";
 import sampleProjects from "../data/sampleProjects";
 import sampleTasks from "../data/sampleTasks";      // ← correct import name
 import TaskModal from "../components/TaskModal";
+import Button from "../components/ui/Button";
 import AIProjectCard from "../components/AIProjectCard";
 
 export default function TeamDashboard() {
@@ -30,6 +31,12 @@ export default function TeamDashboard() {
 
         {/* Tasks & Teams side by side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex justify-between items-center mb-4 col-span-2 md:col-span-1">
+      <h2 className="text-2xl font-semibold">Tasks</h2>
+      <Button onClick={() => alert("Add Task clicked!")}>
+        + New Task
+      </Button>
+    </div>
           <TaskList tasks={tasks} onTaskClick={setSelectedTask} />
           <TeamList teams={sampleTeams} />
         </div>
