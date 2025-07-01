@@ -1,4 +1,4 @@
-export const sampleProjects = [
+const sampleProjects = [
   {
     id: 1,
     name: "AI Project: Auto-Budget Planner",
@@ -46,3 +46,5 @@ export const sampleProjects = [
     ],
   },
 ];
+
+export default sampleData;
