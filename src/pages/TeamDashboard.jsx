@@ -36,6 +36,16 @@ export default function TeamDashboard() {
           <TaskList
             tasks={sampleTasks}
             onTaskClick={(task) => setSelectedTask(task)}
+            onAddTask={() =>
+              setSelectedTask({
+                id: null,
+                title: "",
+                description: "",
+                status: "",
+                assignedTo: "",
+                dueDate: "",
+              })
+            }
           />
           <TeamList teams={sampleTeams} />
         </div>
