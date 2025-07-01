@@ -15,6 +15,7 @@ export default function TeamDashboard() {
   // Holds the task object that’s been clicked. null = modal closed.
   const [selectedTask, setSelectedTask] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
+  const teamLeads = sampleTeams.map((t) => t.lead);
 
   // Close handler simply clears the selection
   const closeModal = () => setSelectedTask(null);
@@ -63,6 +64,7 @@ export default function TeamDashboard() {
           isOpen={true}
           onClose={closeModal}
           task={selectedTask}
+          teamLeads={teamLeads}
         />
       )}
     </>

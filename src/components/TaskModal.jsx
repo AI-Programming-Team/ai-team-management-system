@@ -8,7 +8,7 @@ import {
 } from "./ui/Dialog";
 import Button  from "./ui/Button";
 
-const TaskModal = ({ isOpen, onClose, task }) => {
+const TaskModal = ({ isOpen, onClose, task, teamLeads = [] }) => {
   const [title, setTitle] = useState(task.title || "");
   const [description, setDescription] = useState(task.description || "");
   const [status, setStatus] = useState(task.status || "");
@@ -27,6 +27,7 @@ const TaskModal = ({ isOpen, onClose, task }) => {
     // TODO: save or update logic
     onClose();
   };
+
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -65,12 +66,18 @@ const TaskModal = ({ isOpen, onClose, task }) => {
           </div>
           <div>
             <label className="block text-sm font-medium">Assigned To</label>
-            <input
-              type="text"
+            <select
               className="w-full border rounded p-2"
               value={assignedTo}
               onChange={(e) => setAssignedTo(e.target.value)}
-            />
+            >
+              <option value="">Select team member</option>
+              {teamLeads.map((lead) => (
+                <option key={lead} value={lead}>
+                  {lead}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
             <label className="block text-sm font-medium">Due Date</label>
