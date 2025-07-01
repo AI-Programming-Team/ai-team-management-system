@@ -7,7 +7,7 @@ import sampleTeams from "../data/sampleTeams";
 import sampleProjects from "../data/sampleProjects";
 import sampleTasks from "../data/sampleTasks";      // ← correct import name
 import TaskModal from "../components/TaskModal";
-import { AIProjectCard } from "../components/AIProjectCard";
+import AIProjectCard from "../components/AIProjectCard";
 
 export default function TeamDashboard() {
   // initialize state with the imported sampleTasks
