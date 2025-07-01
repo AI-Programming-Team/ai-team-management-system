@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,32 +9,86 @@ import {
 import Button  from "./ui/Button";
 
 const TaskModal = ({ isOpen, onClose, task }) => {
+  const [title, setTitle] = useState(task.title || "");
+  const [description, setDescription] = useState(task.description || "");
+  const [status, setStatus] = useState(task.status || "");
+  const [assignedTo, setAssignedTo] = useState(task.assignedTo || "");
+  const [dueDate, setDueDate] = useState(task.dueDate || "");
+
+  useEffect(() => {
+    setTitle(task.title || "");
+    setDescription(task.description || "");
+    setStatus(task.status || "");
+    setAssignedTo(task.assignedTo || "");
+    setDueDate(task.dueDate || "");
+  }, [task]);
+
+  const handleSave = () => {
+    // TODO: save or update logic
+    onClose();
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
-        <DialogHeader className="relative">
-          <DialogTitle>{task.title || "New Task"}</DialogTitle>
-          {/* Close “X” in the corner */}
-          <button
-            onClick={onClose}
-            aria-label="Close"
-            className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"
-          >
-            ×
-          </button>
+      <DialogHeader>
+          <DialogTitle>{task.id ? "Edit Task" : "New Task"}</DialogTitle>  
         </DialogHeader>
 
-        <div className="py-4">
-          {/* you can replace this with form fields */}
-          <p>{task.description}</p>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium">Title</label>
+            <input
+              type="text"
+              className="w-full border rounded p-2"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Description</label>
+            <textarea
+              className="w-full border rounded p-2"
+              rows="3"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Status</label>
+            <input
+              type="text"
+              className="w-full border rounded p-2"
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Assigned To</label>
+            <input
+              type="text"
+              className="w-full border rounded p-2"
+              value={assignedTo}
+              onChange={(e) => setAssignedTo(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Due Date</label>
+            <input
+              type="date"
+              className="w-full border rounded p-2"
+              value={dueDate}
+              onChange={(e) => setDueDate(e.target.value)}
+            />
+          </div>
         </div>
 
         <DialogFooter className="space-x-2">
           <Button variant="outline" onClick={onClose}>
             Cancel
           </Button>
-          <Button onClick={() => {/* TODO: save or update logic */}}>
-            Save
+          <Button onClick={handleSave}>
+            {task.id ? "Update" : "Save"}
           </Button>
         </DialogFooter>
       </DialogContent>
