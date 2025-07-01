@@ -6,7 +6,7 @@ import {
   DialogTitle,
   DialogFooter,
 } from "./ui/Dialog";
-import { Button } from "./ui/Button";
+import Button  from "./ui/Button";
 
 const TaskModal = ({ isOpen, onClose, task }) => {
   return (
