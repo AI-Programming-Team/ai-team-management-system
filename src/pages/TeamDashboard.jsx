@@ -1,13 +1,12 @@
 // src/TeamDashboard.jsx
 import React, { useState } from "react";
-import demoTasks from "../data/sampleTasks";  // Import the sample tasks data
 import TaskList from "../components/TaskList";
 import TeamList from "../components/TeamList";
 import sampleTeams from "../data/sampleTeams";
 import demoProjects from "../data/sampleProjects";
-import sampleTasks from "../data/sampleTasks";      // ← import sample tasks
-import TaskModal from "../components/TaskModal";     // ← import our modal
-import { AIProjectCard } from "../components/AIProjectCard";
+import demoTasks from "../data/sampleTasks";      // Keep just one import for sample tasks
+import TaskModal from "../components/TaskModal";  // Keep this too
+import AIProjectCard from "../components/AIProjectCard";
 
 export default function TeamDashboard() {
   // task state & modal state
