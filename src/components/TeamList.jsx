@@ -1,6 +1,6 @@
 import React from "react";
 
-const TeamList = ({ teams }) => {
+const TeamList = ({ teams, onTeamClick }) => {
     return (
         <div style={{ marginTop: "20px" }}>
             <h2>AI Teams</h2>
@@ -8,11 +8,13 @@ const TeamList = ({ teams }) => {
                 {teams.map((team, index) => (
                     <li
                         key={index}
+                        onClick={() => onTeamClick && onTeamClick(team)}
                         style={{
                             padding: "12px",
                             marginBottom: "10px",
                             backgroundColor: "#f3f3f3",
                             borderRadius: "6px",
+                            cursor: onTeamClick ? "pointer" : "default",
                         }}
                     >
                         <strong>{team.name}</strong> — {team.description}

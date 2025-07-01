@@ -8,11 +8,13 @@ import TaskList from "../components/TaskList";
 import TeamList from "../components/TeamList";
 import TaskModal from "../components/TaskModal";
 import AIProjectCard from "../components/AIProjectCard";
+import AIChat from "../components/AIChat";
 
 export default function TeamDashboard() {
   // ── Modal state ──────────────────────────────────────────────────────────────
   // Holds the task object that’s been clicked. null = modal closed.
   const [selectedTask, setSelectedTask] = useState(null);
+  const [selectedTeam, setSelectedTeam] = useState(null);
 
   // Close handler simply clears the selection
   const closeModal = () => setSelectedTask(null);
@@ -47,8 +49,12 @@ export default function TeamDashboard() {
               })
             }
           />
-          <TeamList teams={sampleTeams} />
+          <TeamList teams={sampleTeams} onTeamClick={(team) => setSelectedTeam(team)} />
         </div>
+        
+        {selectedTeam && (
+          <AIChat teamLead={selectedTeam.lead} />
+        )}
       </main>
 
       {/* Render the TaskModal when a task is selected */}
