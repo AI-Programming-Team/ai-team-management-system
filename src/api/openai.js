@@ -1,6 +1,6 @@
 export async function askAI(messages) {
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
-  if (!apiKey) {
+    if (!apiKey || apiKey === "REPLACE_WITH_YOUR_OPENAI_API_KEY") {
     throw new Error("Missing OpenAI API key");
   }
 
