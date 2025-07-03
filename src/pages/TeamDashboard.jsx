@@ -13,9 +13,20 @@ import AIChat from "../components/AIChat";
 export default function TeamDashboard() {
   // ── Modal state ──────────────────────────────────────────────────────────────
   // Holds the task object that’s been clicked. null = modal closed.
+  const [tasks, setTasks] = useState(sampleTasks);
   const [selectedTask, setSelectedTask] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const teamLeads = sampleTeams.map((t) => t.lead);
+
+  const saveTask = (updatedTask) => {
+    setTasks((prev) => {
+      if (updatedTask.id) {
+        return prev.map((t) => (t.id === updatedTask.id ? updatedTask : t));
+      }
+      const nextId = prev.reduce((max, t) => Math.max(max, t.id), 0) + 1;
+      return [...prev, { ...updatedTask, id: nextId }];
+    });
+  };
 
   // Close handler simply clears the selection
   const closeModal = () => setSelectedTask(null);
@@ -37,7 +48,7 @@ export default function TeamDashboard() {
         {/* Tasks & Teams side by side */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <TaskList
-            tasks={sampleTasks}
+            tasks={tasks}
             onTaskClick={(task) => setSelectedTask(task)}
             onAddTask={() =>
               setSelectedTask({
@@ -59,14 +70,15 @@ export default function TeamDashboard() {
       </main>
 
       {/* Render the TaskModal when a task is selected */}
-      {selectedTask && (
-        <TaskModal
-          isOpen={true}
-          onClose={closeModal}
-          task={selectedTask}
+        {selectedTask && (
+          <TaskModal
+            isOpen={true}
+            onClose={closeModal}
+            task={selectedTask}
           teamLeads={teamLeads}
-        />
-      )}
+          onSave={saveTask}
+          />
+        )}
     </>
   );
 }

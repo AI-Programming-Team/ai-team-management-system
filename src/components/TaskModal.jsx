@@ -8,7 +8,7 @@ import {
 } from "./ui/Dialog";
 import Button  from "./ui/Button";
 
-const TaskModal = ({ isOpen, onClose, task, teamLeads = [] }) => {
+const TaskModal = ({ isOpen, onClose, task, teamLeads = [], onSave }) => {
   const [title, setTitle] = useState(task.title || "");
   const [description, setDescription] = useState(task.description || "");
   const [status, setStatus] = useState(task.status || "");
@@ -24,7 +24,14 @@ const TaskModal = ({ isOpen, onClose, task, teamLeads = [] }) => {
   }, [task]);
 
   const handleSave = () => {
-    // TODO: save or update logic
+    onSave({
+      ...task,
+      title,
+      description,
+      status,
+      assignedTo,
+      dueDate,
+    });
     onClose();
   };
 
