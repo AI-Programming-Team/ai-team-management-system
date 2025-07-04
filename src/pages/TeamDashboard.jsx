@@ -10,7 +10,7 @@ import TaskModal from "../components/TaskModal";
 import AIProjectCard from "../components/AIProjectCard";
 import AIChat from "../components/AIChat";
 import Toast from "../components/Toast";
-import usePersistedState from "../hooks/usePersistedState";
+import usePersistedState from "../Hooks/usePersistedState";
 
 export default function TeamDashboard({ user, onLogout }) {
   // ── Modal state ──────────────────────────────────────────────────────────────

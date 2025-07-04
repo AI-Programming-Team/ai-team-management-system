@@ -1,7 +1,7 @@
 import React from "react";
 import TeamDashboard from "./pages/TeamDashboard";
 import Login from "./pages/Login";
-import usePersistedState from "./hooks/usePersistedState";
+import usePersistedState from "./Hooks/usePersistedState";
 
 export default function App() {
   const [user, setUser] = usePersistedState("user", null);
