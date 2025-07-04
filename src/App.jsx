@@ -1,19 +1,21 @@
 import React from "react";
 import TeamDashboard from "./pages/TeamDashboard";
 import Login from "./pages/Login";
-import usePersistedState from "./Hooks/usePersistedState";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function App() {
-  const [user, setUser] = usePersistedState("user", null);
+  const { isAuthenticated, user, logout } = useAuth0();
 
-  const handleLogin = (username) => {
-    setUser({ username });
-  };
-  const handleLogout = () => setUser(null);
-
-  if (!user) {
-    return <Login onLogin={handleLogin} />;
+  if (!isAuthenticated) {
+    return <Login />;
   }
 
-  return <TeamDashboard user={user} onLogout={handleLogout} />;
+  return (
+    <TeamDashboard
+      user={user}
+      onLogout={() =>
+        logout({ logoutParams: { returnTo: window.location.origin } })
+      }
+    />
+  );
 }

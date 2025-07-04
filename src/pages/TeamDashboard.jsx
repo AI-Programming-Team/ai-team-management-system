@@ -29,7 +29,7 @@ export default function TeamDashboard({ user, onLogout }) {
       const nextId = prev.reduce((max, t) => Math.max(max, t.id), 0) + 1;
       return [...prev, { ...updatedTask, id: nextId }];
     });
-    if (updatedTask.assignedTo === user.username) {
+     if (updatedTask.assignedTo === user?.name) {
       setToast(`New task assigned: ${updatedTask.title}`);
     } else {
       setToast("Task saved");
