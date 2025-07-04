@@ -29,3 +29,27 @@ http://localhost:5173
 Add this URL to the **Allowed Callback URLs** and **Allowed Logout URLs** in
 your Auth0 application settings. After saving the changes, restart the dev
 server so Vite picks up the updated environment variables.
+## Backend Setup
+
+To run the FastAPI backend used for brainstorming prompts:
+
+1. Ensure Python 3.11+ is available.
+2. (Optional) Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Add your OpenAI API key to `backend/.env`:
+   ```
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+5. Start the development server:
+   ```bash
+   uvicorn backend.main:app --reload
+   ```
+
+The API will be available at `http://localhost:8000`.
