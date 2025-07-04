@@ -1,5 +1,5 @@
 // src/pages/TeamDashboard.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import sampleTasks from "../data/sampleTasks";
 import demoProjects from "../data/sampleProjects";
@@ -9,14 +9,17 @@ import TeamList from "../components/TeamList";
 import TaskModal from "../components/TaskModal";
 import AIProjectCard from "../components/AIProjectCard";
 import AIChat from "../components/AIChat";
+import Toast from "../components/Toast";
+import usePersistedState from "../hooks/usePersistedState";
 
-export default function TeamDashboard() {
+export default function TeamDashboard({ user, onLogout }) {
   // ── Modal state ──────────────────────────────────────────────────────────────
   // Holds the task object that’s been clicked. null = modal closed.
-  const [tasks, setTasks] = useState(sampleTasks);
+  const [tasks, setTasks] = usePersistedState("tasks", sampleTasks);
   const [selectedTask, setSelectedTask] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
   const teamLeads = sampleTeams.map((t) => t.lead);
+  const [toast, setToast] = useState("");
 
   const saveTask = (updatedTask) => {
     setTasks((prev) => {
@@ -26,14 +29,29 @@ export default function TeamDashboard() {
       const nextId = prev.reduce((max, t) => Math.max(max, t.id), 0) + 1;
       return [...prev, { ...updatedTask, id: nextId }];
     });
+    if (updatedTask.assignedTo === user.username) {
+      setToast(`New task assigned: ${updatedTask.title}`);
+    } else {
+      setToast("Task saved");
+    }
   };
 
   // Close handler simply clears the selection
   const closeModal = () => setSelectedTask(null);
 
+  useEffect(() => {
+    const upcoming = tasks.find((t) => {
+      const diff = new Date(t.dueDate) - new Date();
+      return diff > 0 && diff < 86400000;
+    });
+    if (upcoming) {
+      setToast(`Task "${upcoming.title}" due soon`);
+    }
+  }, [tasks]);
+
   return (
     <>
-      <Header />
+      <Header onLogout={onLogout} />
 
       <main className="mx-auto max-w-7xl px-4 py-6 space-y-6">
         <h1 className="text-3xl font-bold">AI Team Dashboard</h1>
@@ -75,10 +93,11 @@ export default function TeamDashboard() {
             isOpen={true}
             onClose={closeModal}
             task={selectedTask}
-          teamLeads={teamLeads}
-          onSave={saveTask}
+            teamLeads={teamLeads}
+            onSave={saveTask}
           />
         )}
+        <Toast message={toast} />
     </>
   );
 }
