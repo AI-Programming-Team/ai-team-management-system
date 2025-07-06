@@ -53,5 +53,14 @@ To run the FastAPI backend used for brainstorming prompts:
    ```
 
 The API will be available at `http://localhost:8000`.
-backend/.env
-New
+
+## Running Tests
+
+The project uses **Vitest** for unit testing. Install the dependencies and then
+execute:
+
+```bash
+npm test
+```
+
+This will run all test files located next to the source code.
