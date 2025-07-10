@@ -13,6 +13,10 @@ VITE_OPENAI_API_KEY=your_openai_key
 After updating the file, restart the dev server with `npm run dev` or rebuild
 with `npm run build` so Vite can embed the new value.
 
+If your backend runs on a different host or port, set `VITE_BACKEND_URL` in
+`.env` to that base URL (e.g. `http://localhost:8000`). Leaving it empty will
+use the current origin when making requests.
+
 ## Auth0 Setup
 
 The application uses Auth0 for authentication. Create a **Single Page Application**
@@ -49,10 +53,11 @@ To run the FastAPI backend used for brainstorming prompts:
    ```
 5. Start the development server from the `backend` folder:
    ```bash
-   uvicorn main:app --reload
+   uvicorn main:app --reload --host 0.0.0.0
    ```
 
-The API will be available at `http://localhost:8000`.
+If you expose the port, the API will be available at
+`http://localhost:8000` from your browser.
 
 ## Running Tests
 
