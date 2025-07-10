@@ -3,6 +3,7 @@
 import os
 
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import openai
 from dotenv import load_dotenv
@@ -16,6 +17,14 @@ if not api_key:
 openai.api_key = api_key
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class Idea(BaseModel):
     user_id: str
