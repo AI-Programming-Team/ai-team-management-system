@@ -9,7 +9,8 @@ function IdeaSubmission() {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const baseUrl = import.meta.env.VITE_BACKEND_URL || '';
+      const baseUrl =
+        import.meta.env.VITE_BACKEND_URL || window.location.origin;
       const response = await axios.post(`${baseUrl}/submit-idea`, {
         user_id: 'user123', // Replace dynamically later
         idea: idea,
